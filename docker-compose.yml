@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  nginx1:
+    image: nginx:alpine
+    container_name: nginx1
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/nginx1.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php1
+    networks:
+      - app-network
+
+  nginx2:
+    image: nginx:alpine
+    container_name: nginx2
+    ports:
+      - "8082:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/nginx2.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php2
+    networks:
+      - app-network
+
+  php1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php1
+    volumes:
+      - ./src:/var/www/html
+      - ./.env.php1:/var/www/html/.env
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=laravel
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=laravel
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
+  php2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php2
+    volumes:
+      - ./src:/var/www/html
+      - ./.env.php2:/var/www/html/.env
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=laravel
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=laravel
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=laravel
+      - MYSQL_ROOT_PASSWORD=laravel
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
