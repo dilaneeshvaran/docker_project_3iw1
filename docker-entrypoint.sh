@@ -32,4 +32,7 @@ else
     echo "Skipping migrations and seeds on $HOSTNAME..."
 fi
 
+php artisan config:clear
+php artisan cache:clear
+
 php-fpm

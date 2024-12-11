@@ -32,14 +32,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: php1
-    volumes:
-      - ./src:/var/www/html
-      - ./.env.php1:/var/www/html/.env
     environment:
+      - SERVER=server-1
       - DB_HOST=mysql
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel
       - DB_PASSWORD=laravel
+    volumes:
+      - ./src:/var/www/html
+      - ./.env.php1:/var/www/html/.env
     networks:
       - app-network
     depends_on:
@@ -50,14 +51,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: php2
-    volumes:
-      - ./src:/var/www/html
-      - ./.env.php2:/var/www/html/.env
     environment:
+      - SERVER=server-2
       - DB_HOST=mysql
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel
       - DB_PASSWORD=laravel
+    volumes:
+      - ./src:/var/www/html
+      - ./.env.php2:/var/www/html/.env
     networks:
       - app-network
     depends_on:
