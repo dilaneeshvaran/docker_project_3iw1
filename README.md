@@ -11,14 +11,10 @@
 1. Start the Docker containers:
 
    ```bash
-   docker compose up -d
+   docker compose up
    ```
 
    > **Note**: Wait a few minutes for all scripts to execute completely, it may take some time to run the first time meanwhile you can monitor the logs to track the progress.
-
-   ```bash
-   docker compose logs -f
-   ```
 
 ## Accessing the Application
 
