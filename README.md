@@ -20,16 +20,10 @@
    docker compose logs -f
    ```
 
-2. Wait for all services to be healthy. You can check the status with:
-
-   ```bash
-   docker compose ps
-   ```
-
 ## Accessing the Application
 
-* Frontend: [http://localhost:8081](http://localhost:8081)
-* Backend API: [http://localhost:8082](http://localhost:8082)
+* Service 1 : [http://localhost:8081](http://localhost:8081)
+* Service 2 : [http://localhost:8082](http://localhost:8082)
 
 ### MySQL Database Verification
 
