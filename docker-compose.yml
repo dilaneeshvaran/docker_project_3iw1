@@ -33,6 +33,7 @@ services:
       dockerfile: Dockerfile
     container_name: php1
     environment:
+      - HOSTNAME=php1
       - SERVER=server-1
       - DB_HOST=mysql
       - DB_DATABASE=laravel
@@ -52,6 +53,7 @@ services:
       dockerfile: Dockerfile
     container_name: php2
     environment:
+      - HOSTNAME=php2
       - SERVER=server-2
       - DB_HOST=mysql
       - DB_DATABASE=laravel

@@ -15,6 +15,8 @@
    ```
 
    Wait a few minutes for all scripts to execute completely.
+   It may take some time to run the first time.
+   You can monitor the logs to track the progress.
 
 ### Development
 

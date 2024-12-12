@@ -19,9 +19,24 @@ if [ ! -f ".env" ]; then
     sed -i 's/DB_PASSWORD=/DB_PASSWORD=laravel/' .env
 fi
 
-composer install
-npm install
-npm run build
+
+# Run composer and npm only on php1
+if [ "$HOSTNAME" == "php1" ]; then
+    echo "Installing dependencies on php1..."
+    composer install
+    npm install
+    npm run build
+
+    # Create a file to signal the completion of dependancy installation
+    touch /var/www/html/.dependencies_installed
+    echo "Dependencies installed and flag file created."
+else
+    echo "Waiting for php1 to install dependencies..."
+    while [ ! -f /var/www/html/.dependencies_installed ]; do
+        sleep 1
+    done
+    echo "Dependencies installation complete!"
+fi
 
 # run migrations and seed only on php1 service
 if [ "$HOSTNAME" == "php1" ]; then
@@ -31,8 +46,5 @@ if [ "$HOSTNAME" == "php1" ]; then
 else
     echo "Skipping migrations and seeds on $HOSTNAME..."
 fi
-
-php artisan config:clear
-php artisan cache:clear
 
 php-fpm
