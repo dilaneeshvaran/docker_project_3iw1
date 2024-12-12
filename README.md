@@ -28,8 +28,8 @@
 
 ## Accessing the Application
 
-* Frontend: [http://localhost:8081](http://localhost:8081)
-* Backend API: [http://localhost:8082](http://localhost:8082)
+* Server 1 : [http://localhost:8081](http://localhost:8081)
+* Server 2 : [http://localhost:8082](http://localhost:8082)
 
 ### MySQL Database Verification
 
